@@ -61,12 +61,26 @@ jobs:
           cd $OPENWRT_ROOT_PATH
           make defconfig
           
-      - name: Compile Tools
+      - name: Make download
         run: |
-          cd $OPENWRT_ROOT_PATH
-          echo -e "$(nproc) thread compile"
-          make tools/compile -j$(nproc) || make tools/compile -j1 V=s    
+          make download -j8
+          find ./dl/ -size -1024c -exec rm -f {} \\;
+          df -h
           
-      - name : Test
-        run : |
-          tree
+      - name: Compile firmware
+        run: |
+          make -j$(nproc) || make -j1 V=s
+          echo "======================="
+          echo "Space usage:"
+          echo "======================="
+          df -h
+          echo "======================="
+          du -h --max-depth=1 ./ --exclude=build_dir --exclude=bin
+          du -h --max-depth=1 ./build_dir
+          du -h --max-depth=1 ./bin
+
+      - name: Deliver buildinfo
+        uses: actions/upload-artifact@v2
+        with:
+          name: OpenWrt_buildinfo
+          path: ./bin/
