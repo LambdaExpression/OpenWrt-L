@@ -3,8 +3,8 @@ name: Build x86/64 openwrt
 on:
   push:
     paths:
-      - "./version"
-      - "./github/workflows/**"
+      - "version"
+      - ".github/workflows/**"
       
 env:
   CONFIG_FILE: config/x86/64.config
