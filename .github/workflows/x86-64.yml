@@ -24,6 +24,7 @@ jobs:
       - name: Initialization Environment
         env:
           DEBIAN_FRONTEND: noninteractive
+          CACHE_NAME:  Initialization Environment ubuntu-20.04
         run: |
           sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
           sudo -E apt-get -qq update
@@ -60,12 +61,6 @@ jobs:
           echo -e "\nCONFIG_ALL_NONSHARED=y" >> $OPENWRT_ROOT_PATH/.config
           cd $OPENWRT_ROOT_PATH
           make defconfig
-          
-      - name: Make download
-        run: |
-          make download -j8
-          find ./dl/ -size -1024c -exec rm -f {} \\;
-          df -h
           
       - name: Compile firmware
         run: |
