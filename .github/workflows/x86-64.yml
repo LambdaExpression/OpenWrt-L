@@ -56,7 +56,6 @@ jobs:
           
           
       - name: Install Feeds
-        if: steps.hash.outputs.REBUILD_TOOLCHAIN == 'true'
         run: |
           cd $OPENWRT_ROOT_PATH
           ./scripts/feeds update -a
@@ -64,7 +63,6 @@ jobs:
           make defconfig
           
       - name: Compile Tools
-        if: steps.hash.outputs.REBUILD_TOOLCHAIN == 'true'
         run: |
           cd $OPENWRT_ROOT_PATH
           echo -e "$(nproc) thread compile"
