@@ -8,8 +8,8 @@ on:
       
 env:
   CONFIG_FILE: config/x86/64.config
-  SOURCE_URL: https://github.com/coolsnowwolf/lede
-  SOURCE_BRANCH: 20211107
+  SOURCE_URL: https://github.com/openwrt/openwrt
+  SOURCE_BRANCH: v21.02.2
   TOOLCHAIN_TAG: Build x86/64 openwrt
   CLASH_BINARY_PLATFORM: amd64
   FIRMWARE_RELEASE_UPLOAD: false
@@ -49,6 +49,11 @@ jobs:
           echo "OPENWRT_ROOT_PATH=$PWD" >> $GITHUB_ENV
           echo "::set-output name=OPENWRT_ROOT_PATH::$(echo $PWD)"
           
+      - name: Update Ip
+        run: |
+          cd $OPENWRT_ROOT_PATH
+          sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
+          
           
       - name: Install Feeds
         run: |
@@ -59,8 +64,6 @@ jobs:
       - name: Generate Toolchain Config
         run: |
           [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRT_ROOT_PATH/.config
-          echo -e "\nCONFIG_ALL=y" >> $OPENWRT_ROOT_PATH/.config
-          echo -e "\nCONFIG_ALL_NONSHARED=y" >> $OPENWRT_ROOT_PATH/.config
           cd $OPENWRT_ROOT_PATH
           make defconfig
           
