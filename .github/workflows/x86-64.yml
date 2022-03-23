@@ -77,18 +77,11 @@ jobs:
           echo "======================="
           df -h
           echo "======================="
-          mv ./build_dir $PWD/build_dir
+          tree
           mv ./bin $PWD/bin
           cd $PWD
-          du -h --max-depth=1 ./ --exclude=build_dir --exclude=bin
-          du -h --max-depth=1 ./build_dir
-          du -h --max-depth=1 ./bin
-
-      - name: Deliver build
-        uses: actions/upload-artifact@v2
-        with:
-          name: OpenWrt_build
-          path: ./build_dir/
+          pwd
+          tree
           
       - name: Deliver bin
         uses: actions/upload-artifact@v2
