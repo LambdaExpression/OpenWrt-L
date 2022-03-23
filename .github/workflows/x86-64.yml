@@ -61,6 +61,13 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           
+      - name: Add plug-in
+        run: |
+          cd $OPENWRT_ROOT_PATH
+          cd openwrt/package
+          git clone https://github.com/jerrykuku/luci-theme-argon.git
+          git clone https://github.com/rufengsuixing/luci-app-adguardhome.git
+      
       - name: Generate Toolchain Config
         run: |
           [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRT_ROOT_PATH/.config
@@ -77,11 +84,9 @@ jobs:
           echo "======================="
           df -h
           echo "======================="
-          tree
           mv ./bin $PWD/bin
           cd $PWD
           pwd
-          tree
           
       - name: Deliver bin
         uses: actions/upload-artifact@v2
