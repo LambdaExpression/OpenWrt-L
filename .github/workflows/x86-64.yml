@@ -61,7 +61,6 @@ jobs:
       
       - name: Generate Toolchain Config
         run: |
-          make menuconfig
           mv $CONFIG_FILE $OPENWRT_ROOT_PATH/.config
           
       - name: Compile firmware
