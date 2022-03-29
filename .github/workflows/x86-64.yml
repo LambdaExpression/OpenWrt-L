@@ -8,8 +8,8 @@ on:
       
 env:
   CONFIG_FILE: config/x86/64.config
-  SOURCE_URL: https://github.com/openwrt/openwrt
-  SOURCE_BRANCH: v21.02.2
+  SOURCE_URL: https://github.com/coolsnowwolf/lede.git
+  SOURCE_BRANCH: master
   TOOLCHAIN_TAG: Build x86/64 openwrt
   CLASH_BINARY_PLATFORM: amd64
   FIRMWARE_RELEASE_UPLOAD: false
@@ -27,7 +27,7 @@ jobs:
           CACHE_NAME:  Initialization Environment ubuntu-20.04
         run: |
           sudo -E apt-get update
-          sudo -E apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync
+          sudo -E apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync
           sudo -E apt-get clean
           sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
           
@@ -43,7 +43,7 @@ jobs:
           echo "OPENWRT_ROOT_PATH=$PWD" >> $GITHUB_ENV
           echo "::set-output name=OPENWRT_ROOT_PATH::$(echo $PWD)"
           
-      - name: Update Ip
+      - name: Update Ip And 
         run: |
           cd $OPENWRT_ROOT_PATH
           sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
@@ -77,8 +77,12 @@ jobs:
           cd $PWD
           pwd
           
+      - name: Delete Packages
+        run: |
+          rm -rf $OPENWRT_ROOT_PATH/bin/targets/x86/64/packages
+          
       - name: Deliver bin
         uses: actions/upload-artifact@v2
         with:
           name: OpenWrt_bin
-          path: ./bin/targets
+          path: $OPENWRT_ROOT_PATH/bin/targets/x86/64
