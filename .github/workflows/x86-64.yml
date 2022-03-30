@@ -73,16 +73,16 @@ jobs:
           echo "======================="
           df -h
           echo "======================="
-          mv ./bin $PWD/bin
+          mv $OPENWRT_ROOT_PATH/bin /home/bin
           cd $PWD
           pwd
           
       - name: Delete Packages
         run: |
-          rm -rf $OPENWRT_ROOT_PATH/bin/targets/x86/64/packages
+          rm -rf /home/bin/targets/x86/64/packages
           
       - name: Deliver bin
         uses: actions/upload-artifact@v2
         with:
           name: OpenWrt_bin
-          path: $OPENWRT_ROOT_PATH/bin/targets/x86/64
+          path: /home/bin/targets/x86/64
