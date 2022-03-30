@@ -81,13 +81,13 @@ jobs:
       - name: Finishing File
         run: |
           mkdir -p $OPENWRT_ROOT_PATH/bin/targets/x86/64/packages
-          echo "123" >> $OPENWRT_ROOT_PATH/bin/1.txt
+          echo "123" >> $OPENWRT_ROOT_PATH/bin/targets/x86/64/1.txt
           echo "123" >> $OPENWRT_ROOT_PATH/bin/targets/x86/64/packages/2.txt
           mv $OPENWRT_ROOT_PATH/bin $SOURCE_PATH
           tar -zcvf $SOURCE_PATH/bin/targets/x86/64/packages.tar.gz $SOURCE_PATH/bin/targets/x86/64/packages --remove-files
           
       - name: Deliver bin
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: OpenWrt_bin
-          path: bin/targets/x86/64
+          path: bin/targets/x86/64/*
