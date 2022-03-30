@@ -89,6 +89,35 @@ jobs:
       - name: Deliver bin
         uses: actions/upload-artifact@v3
         with:
-          path: bin/targets/x86/64/1.txt
+          name: bin
+          path: bin/targets/x86/64/*
+          retention-days: 30
+          
+      - name: Deliver packages.tar.gz
+        uses: actions/upload-artifact@v3
+        with:
+          name: bin
+          path: bin/targets/x86/64/packages.tar.gz
+          retention-days: 30
+          
+      - name: Deliver openwrt-x86-64-generic-squashfs-combined-efi.img
+        uses: actions/upload-artifact@v3
+        with:
+          name: bin
+          path: bin/targets/x86/64/openwrt-x86-64-generic-squashfs-combined-efi.img
+          retention-days: 30
+          
+      - name: Deliver openwrt-x86-64-generic-squashfs-rootfs.img
+        uses: actions/upload-artifact@v3
+        with:
+          name: openwrt-x86-64-generic-squashfs-rootfs.img
+          path: bin/targets/x86/64/openwrt-x86-64-generic-squashfs-rootfs.img
+          retention-days: 30
+          
+      - name: Deliver openwrt-x86-64-generic-squashfs-combined-efi.vmdk
+        uses: actions/upload-artifact@v3
+        with:
+          name: openwrt-x86-64-generic-squashfs-combined-efi.vmdk
+          path: bin/targets/x86/64/openwrt-x86-64-generic-squashfs-combined-efi.vmdk
           retention-days: 30
 
