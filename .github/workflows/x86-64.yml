@@ -89,4 +89,6 @@ jobs:
       - name: Deliver bin
         uses: actions/upload-artifact@v3
         with:
-          path: bin/targets/x86/64/*
+          path: bin/targets/x86/64/1.txt
+          retention-days: 30
+
