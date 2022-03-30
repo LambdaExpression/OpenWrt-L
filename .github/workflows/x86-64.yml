@@ -47,7 +47,8 @@ jobs:
         run: |
           cd $OPENWRT_ROOT_PATH
           sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
-          
+          sed -i 's/OpenWrt/OpenWrt-L/g' package/base-files/files/bin/config_generate          
+          sed -i 's/UTC/CST-8/g' package/base-files/files/bin/config_generate                    
           
       - name: Install Feeds
         run: |
@@ -73,16 +74,16 @@ jobs:
           echo "======================="
           df -h
           echo "======================="
-          mv $OPENWRT_ROOT_PATH/bin /home/bin
+          mv $OPENWRT_ROOT_PATH/bin $PWD/bin
           cd $PWD
           pwd
           
-      - name: Delete Packages
+      - name: Compression Packages
         run: |
-          rm -rf /home/bin/targets/x86/64/packages
+          tar -zcvf $PWD/bin/targets/x86/64/packages.tar.gz $PWD/bin/targets/x86/64/packages --remove-files
           
       - name: Deliver bin
         uses: actions/upload-artifact@v2
         with:
           name: OpenWrt_bin
-          path: /home/bin/targets/x86/64
+          path: $PWD/bin/targets/x86/64
