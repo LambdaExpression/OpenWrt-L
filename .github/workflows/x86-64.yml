@@ -85,7 +85,7 @@ jobs:
           echo "123" >> $OPENWRT_ROOT_PATH/bin/targets/x86/64/packages/2.txt
           mv $OPENWRT_ROOT_PATH/bin $SOURCE_PATH
           tar -zcvf $SOURCE_PATH/bin/targets/x86/64/packages.tar.gz $SOURCE_PATH/bin/targets/x86/64/packages --remove-files
-          cp $SOURCE_PATH/bin $SOURCE_PATH/bin2
+          cp -r $SOURCE_PATH/bin $SOURCE_PATH/bin2
           
       - name: Deliver bin
         uses: actions/upload-artifact@v3
