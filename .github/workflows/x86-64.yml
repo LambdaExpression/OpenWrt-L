@@ -89,5 +89,4 @@ jobs:
       - name: Deliver bin
         uses: actions/upload-artifact@v3
         with:
-          name: OpenWrt_bin
           path: bin/targets/x86/64/*
