@@ -85,7 +85,6 @@ jobs:
           echo "123" >> $OPENWRT_ROOT_PATH/bin/targets/x86/64/packages/2.txt
           mv $OPENWRT_ROOT_PATH/bin $SOURCE_PATH
           tar -zcvf $SOURCE_PATH/bin/targets/x86/64/packages.tar.gz $SOURCE_PATH/bin/targets/x86/64/packages --remove-files
-          cp -r $SOURCE_PATH/bin $SOURCE_PATH/bin2
           
       - name: Deliver bin
         uses: actions/upload-artifact@v3
@@ -97,28 +96,28 @@ jobs:
       - name: Deliver packages.tar.gz
         uses: actions/upload-artifact@v3
         with:
-          name: bin
-          path: bin2/targets/x86/64/packages.tar.gz
+          name: packages.tar.gz
+          path: bin/targets/x86/64/packages.tar.gz
           retention-days: 30
           
       - name: Deliver openwrt-x86-64-generic-squashfs-combined-efi.img
         uses: actions/upload-artifact@v3
         with:
-          name: bin
-          path: bin2/targets/x86/64/openwrt-x86-64-generic-squashfs-combined-efi.img
+          name: openwrt-x86-64-generic-squashfs-combined-efi.img
+          path: bin/targets/x86/64/openwrt-x86-64-generic-squashfs-combined-efi.img
           retention-days: 30
           
       - name: Deliver openwrt-x86-64-generic-squashfs-rootfs.img
         uses: actions/upload-artifact@v3
         with:
           name: openwrt-x86-64-generic-squashfs-rootfs.img
-          path: bin2/targets/x86/64/openwrt-x86-64-generic-squashfs-rootfs.img
+          path: bin/targets/x86/64/openwrt-x86-64-generic-squashfs-rootfs.img
           retention-days: 30
           
       - name: Deliver openwrt-x86-64-generic-squashfs-combined-efi.vmdk
         uses: actions/upload-artifact@v3
         with:
           name: openwrt-x86-64-generic-squashfs-combined-efi.vmdk
-          path: bin2/targets/x86/64/openwrt-x86-64-generic-squashfs-combined-efi.vmdk
+          path: bin/targets/x86/64/openwrt-x86-64-generic-squashfs-combined-efi.vmdk
           retention-days: 30
 
