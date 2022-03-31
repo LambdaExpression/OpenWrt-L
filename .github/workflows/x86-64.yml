@@ -70,7 +70,7 @@ jobs:
         run: |
           df -hT $PWD
           cd $OPENWRT_ROOT_PATH
-          make -j$(nproc) || make -j1 V=s
+          make -j$(nproc)
           echo "======================="
           echo "Space usage:"
           echo "======================="
