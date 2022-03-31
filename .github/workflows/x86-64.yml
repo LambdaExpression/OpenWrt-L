@@ -76,11 +76,10 @@ jobs:
           echo "======================="
           df -h
           echo "======================="
-          mv $OPENWRT_ROOT_PATH/bin ../../
+          mv $OPENWRT_ROOT_PATH/bin $SOURCE_PATH
           
       - name: Finishing File
         run: |
-          mv $OPENWRT_ROOT_PATH/bin $SOURCE_PATH
           tar -zcvf $SOURCE_PATH/bin/targets/x86/64/packages.tar.gz $SOURCE_PATH/bin/targets/x86/64/packages --remove-files
           
       - name: Deliver bin
