@@ -80,7 +80,7 @@ jobs:
           
       - name: Finishing File
         run: |
-          tar -zcvf $SOURCE_PATH/bin/targets/x86/64/packages.tar.gz $SOURCE_PATH/bin/targets/x86/64/packages --remove-files
+          tar -zcvf $SOURCE_PATH/bin/targets/rockchip/armv8/packages.tar.gz $SOURCE_PATH/bin/targets/rockchip/armv8/packages --remove-files
           
       - name: Deliver bin
         uses: actions/upload-artifact@v3
