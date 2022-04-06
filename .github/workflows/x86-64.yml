@@ -96,24 +96,17 @@ jobs:
           path: bin/targets/x86/64/packages.tar.gz
           retention-days: 30
           
-      - name: Deliver openwrt-x86-64-generic-squashfs-combined-efi.img
+      - name: Deliver openwrt-x86-64-generic-ext4-combined-efi.img
         uses: actions/upload-artifact@v3
         with:
-          name: openwrt-x86-64-generic-squashfs-combined-efi.img
-          path: bin/targets/x86/64/openwrt-x86-64-generic-squashfs-combined-efi.img
+          name: openwrt-x86-64-generic-ext4-combined-efi.img
+          path: bin/targets/x86/64/openwrt-x86-64-generic-ext4-combined-efi.img
           retention-days: 30
           
-      - name: Deliver openwrt-x86-64-generic-squashfs-rootfs.img
+      - name: Deliver openwrt-x86-64-generic-ext4-combined-efi.vmdk
         uses: actions/upload-artifact@v3
         with:
-          name: openwrt-x86-64-generic-squashfs-rootfs.img
-          path: bin/targets/x86/64/openwrt-x86-64-generic-squashfs-rootfs.img
-          retention-days: 30
-          
-      - name: Deliver openwrt-x86-64-generic-squashfs-combined-efi.vmdk
-        uses: actions/upload-artifact@v3
-        with:
-          name: openwrt-x86-64-generic-squashfs-combined-efi.vmdk
-          path: bin/targets/x86/64/openwrt-x86-64-generic-squashfs-combined-efi.vmdk
+          name: openwrt-x86-64-generic-ext4-combined-efi.vmdk
+          path: bin/targets/x86/64/openwrt-x86-64-generic-ext4-combined-efi.vmdk
           retention-days: 30
 
