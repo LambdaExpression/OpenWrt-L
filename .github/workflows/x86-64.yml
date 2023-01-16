@@ -5,6 +5,8 @@ on:
     paths:
       - "version"
       - ".github/workflows/**"
+  schedule:
+    - cron: 0 0 1,8,16,24 * *
       
 env:
   CONFIG_FILE: config/x86/64.config
